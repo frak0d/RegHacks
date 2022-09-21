@@ -1,3 +1,8 @@
+bin/
+regs/
+build/
+.vscode/
+
 # Prerequisites
 *.d
 
