@@ -5,7 +5,6 @@
 #include "b3.reg.cpp"
 //#include "b4.reg.cpp"
 //#include "b5.reg.cpp"
-//#include "b6.reg.cpp"
 
 struct rhe_sz_type
 {
@@ -20,6 +19,5 @@ constexpr rhe_sz_type rhe_map[7] =
 	{b2_reg, b2_reg_sz},
 	{b3_reg, b3_reg_sz},
 //	{b4_reg, b4_reg_sz},
-//	{b5_reg, b5_reg_sz},
-//	{b6_reg, b6_reg_sz}
+//	{b5_reg, b5_reg_sz}
 };

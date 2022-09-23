@@ -117,6 +117,25 @@ void button_boilerplate(uint8_t id, const char* desc, bool reboot_required=true)
     }
 }
 
+void disable_windows_defender()
+{
+    HKEY key, new_key;
+    DWORD disable = 1;
+    if (ERROR_SUCCESS == RegOpenKeyExA(HKEY_LOCAL_MACHINE, "SOFTWARE\\Policies\\Microsoft\\Windows Defender", 0, KEY_ALL_ACCESS, &key))
+    {
+        RegSetValueExA(key,     "DisableAntiSpyware", 0, REG_DWORD, (const BYTE*)&disable, sizeof(disable));
+        RegCreateKeyExA(key,    "Real-Time Protection", 0, 0, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS, 0, &new_key, 0);
+        RegSetValueExA(new_key, "DisableRealtimeMonitoring", 0, REG_DWORD, (const BYTE*)&disable, sizeof(disable));
+        RegSetValueExA(new_key, "DisableBehaviorMonitoring", 0, REG_DWORD, (const BYTE*)&disable, sizeof(disable));
+        RegSetValueExA(new_key, "DisableScanOnRealtimeEnable", 0, REG_DWORD, (const BYTE*)&disable, sizeof(disable));
+        RegSetValueExA(new_key, "DisableOnAccessProtection", 0, REG_DWORD, (const BYTE*)&disable, sizeof(disable));
+        RegSetValueExA(new_key, "DisableIOAVProtection", 0, REG_DWORD, (const BYTE*)&disable, sizeof(disable));
+        
+        RegCloseKey(key);
+        RegCloseKey(new_key);
+    }
+}
+
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nShowCmd)
 {
     cwd2TempPath();
@@ -173,21 +192,25 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         return 0;
     });
 
-    HButton b5("Enable Developer Mode");
+    HButton b5("Disable Windows Updates");
     b5.setSize(240, 70);
     b5.setLocation(50, 300);
     b5.addActionListener([](ActionEvent) -> int
     {
-        button_boilerplate(5, "Enabling Developer Mode...");
+        button_boilerplate(5, "Disabling Windows Updates...");
         return 0;
     });
 
-    HButton b6("Disable Windows Updates");
+    HButton b6("Disable Windows Defender");
     b6.setSize(240, 70);
     b6.setLocation(310, 300);
     b6.addActionListener([](ActionEvent) -> int
     {
-        button_boilerplate(6, "Disabling Windows Updates...");
+        println("Disabling Windows Defender...");
+        disable_windows_defender();
+        println("Done!"); println();
+        print("Changes will take Effect after a Reboot!");
+        playSound(result::SUCCESS);
         return 0;
     });
 
