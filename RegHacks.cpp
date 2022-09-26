@@ -14,7 +14,7 @@ namespace fs = std::filesystem;
 HTextArea logs;
 
 const char* reghacks_ascii_art = "\r\n"
-"                             WELCOME TO REG HACKS v1.0\r\n"
+"                             WELCOME TO REG HACKS v1.2\r\n"
 "             Use the Provided Buttons to Enable/Disable Hacks.\r\n";
 
 void clear()
@@ -147,7 +147,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         return 1;
     }
 
-    HFrame frame = HFrame("RegHacks v1.0 for Windows 10/11");
+    HFrame frame = HFrame("RegHacks v1.2 for Windows 10/11");
     frame.setSize(610, 450);
     frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
     
@@ -192,12 +192,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
         return 0;
     });
 
-    HButton b5("Disable Windows Updates");
+    HButton b5("Disable Cortana and OneDrive");
     b5.setSize(240, 70);
     b5.setLocation(50, 300);
     b5.addActionListener([](ActionEvent) -> int
     {
-        button_boilerplate(5, "Disabling Windows Updates...");
+        button_boilerplate(5, "Disabling Cortana and OneDrive...");
         return 0;
     });
 
@@ -206,7 +206,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     b6.setLocation(310, 300);
     b6.addActionListener([](ActionEvent) -> int
     {
-        println("Disabling Windows Defender...");
+        clear(); println();
+        print("Disabling Windows Defender...");
         disable_windows_defender();
         println("Done!"); println();
         print("Changes will take Effect after a Reboot!");
@@ -221,7 +222,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
     frame.add(&b4);
     frame.add(&b5);
     frame.add(&b6);
+
     frame.setVisible(true);
+    HICON hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(0));
+    SendMessage(frame.hwnd, WM_SETICON, ICON_BIG, (LPARAM)hIcon);
+    SendMessage(frame.hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon);
 
     std::thread([]()
     {

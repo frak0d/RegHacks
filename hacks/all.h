@@ -3,8 +3,8 @@
 #include "b1.reg.cpp"
 #include "b2.reg.cpp"
 #include "b3.reg.cpp"
-//#include "b4.reg.cpp"
-//#include "b5.reg.cpp"
+#include "b4.reg.cpp"
+#include "b5.reg.cpp"
 
 struct rhe_sz_type
 {
@@ -12,12 +12,12 @@ struct rhe_sz_type
 	size_t size;
 };
 
-constexpr rhe_sz_type rhe_map[7] =
+constexpr rhe_sz_type rhe_map[6]
 {
 	{nullptr, 0},
-	{b1_reg, b1_reg_sz},
-	{b2_reg, b2_reg_sz},
-	{b3_reg, b3_reg_sz},
-//	{b4_reg, b4_reg_sz},
-//	{b5_reg, b5_reg_sz}
+	{b1_reg, sizeof(b1_reg)},
+	{b2_reg, sizeof(b2_reg)},
+	{b3_reg, sizeof(b3_reg)},
+	{b4_reg, sizeof(b4_reg)},
+	{b5_reg, sizeof(b5_reg)}
 };

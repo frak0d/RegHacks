@@ -1,15 +1,15 @@
 #define VER_COMPANYNAME            "0xB00B\0"
-#define VER_FILEDESCRIPTION        "A Collection of Registry Hacks For Windows 10.\0"
+#define VER_FILEDESCRIPTION        "A Collection of Registry Hacks For Windows 10 (and 11?)\0"
 #define VER_LEGALCOPYRIGHT         "0xB00B\0"
 #define VER_PRODUCTNAME            "RegHacks\0"
-#define VER_PRODUCTVERSION         "v1.1\0"
+#define VER_PRODUCTVERSION         "v1.2\0"
 
 0 ICON        "RegHacks.ico"
 
 1 RT_MANIFEST "RegHacks.manifest"
 
 2 VERSIONINFO
-FILEVERSION     0,1,1,0
+FILEVERSION     0,1,2,0
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
